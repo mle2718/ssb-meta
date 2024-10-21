@@ -1,12 +1,12 @@
 # Overview
 Tables: MQRS_MORT_ELIG_CRITERIA
-
+MQRS_ALLOCATION_TRANSFER -- Permanent transfer of share
 Location: NEFSCDB1
 
 Schema: NEFSC_GARFO
 The MQRS system is fun. It contains information on "eligibilities."  The sector rosters are also stored here.  It is used in conjunction with other tables, but not cross-referenced against them for logical consistency.
 
-
+MQRS_ALLOCATION_TRANSFER contains permanent transfer of shares, in percentages, and the price.  This table is maintained in double-book accounting, so there is 1 row for the buyer and one row for the seller.
 
 The SECTOR schema still exists on SOLE.
         
@@ -109,6 +109,18 @@ SELECT PER_NUM AS PERMIT,
 		AND DATE_ELIGIBLE IS NOT NULL
 		AND (TRUNC(DATE_CANCELLED) >= '01-MAY-03' or DATE_CANCELLED IS NULL):
 ```
+
+Here is some code to link the Permanent Share transfers to the yearly allocations (pounds). To filter out internal transfers or bartering arrangements with no compensation, include price>0. This code was confirmed to be correct by Ben Galuardi (October 21, 2024).
+```
+select * from NEFSC_GARFO.AMS_ALLOCATION_TX a, NEFSC_GARFO.MQRS_ALLOCATION_TRANSFER b
+where a.CHARGE_MRI=b.ALLOCATION_NUMBER
+and a.EFFECTIVE_DATE=b.TRANSFER_DATE
+and a.ROOT_MRI=b.TO_FROM
+and a.FMP='SCAG'
+and b.price>0
+order by transfer_number, allocation_number;
+```
+
   
 # Sample Projects
 
