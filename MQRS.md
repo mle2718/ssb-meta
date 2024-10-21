@@ -110,12 +110,14 @@ SELECT PER_NUM AS PERMIT,
 		AND (TRUNC(DATE_CANCELLED) >= '01-MAY-03' or DATE_CANCELLED IS NULL):
 ```
 
-Here is some code to link the Permanent Share transfers to the yearly allocations (pounds)
+Here is some code to link the Permanent Share transfers to the yearly allocations (pounds). To filter out internal transfers or bartering arrangements with no compensation, include price>0. This code was confirmed to be correct by Ben Galuardi (October 21, 2024).
 ```
 select * from NEFSC_GARFO.AMS_ALLOCATION_TX a, NEFSC_GARFO.MQRS_ALLOCATION_TRANSFER b
 where a.CHARGE_MRI=b.ALLOCATION_NUMBER
 and a.EFFECTIVE_DATE=b.TRANSFER_DATE
 and a.ROOT_MRI=b.TO_FROM
+and a.FMP='SCAG'
+and b.price>0
 order by transfer_number, allocation_number;
 ```
 
