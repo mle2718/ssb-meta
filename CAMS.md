@@ -134,6 +134,12 @@ Note that the above query (Catch level info for those trips) will only capture a
 
 The variable ``PERMIT_STATE_FED`` in the CAMS_LAND table indicates whether landings are associated with state (PERMIT=000000) or federal fishing activity. Unknown vessels (``PERMIT=190998, 390998, 490998``) are classified as Federal  in the construction of ``PERMIT_STATE_FED''
 
+### Classifying Limited Access, General Category and Access Area trips 
+
+[Stata code to extract and classify scallop trips](/code_fragments/SCALLOP_CAMS_GC_LA.do)
+
+
+
 # Update Frequency and Completeness 
 
 # Other Metadata sources
