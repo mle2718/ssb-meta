@@ -33,7 +33,7 @@ jdbc load, exec ("select CAMSID, ACTIVITY_CODE_1, ACCESSAREA from CAMS_GARFO.CAM
 **label all general category trips 
  gen GC= 1 if activity_code =="SES-SCG" 
   replace GC = 0 if missing(GC)
-  
+  *** Northern Gulf of Maine trips by the Scallop General Category fleet will have the ACTIVITY_CODE_1 that starts with "SES-SCG-NG"
  *** rename access area
  
  rename ACCESSAREA access_area
