@@ -1,7 +1,7 @@
 ***This file parses the ACTIVITY_CODE_1 field from CAMS_SUBTRIP and VTR_ORPHANS_SUBTRIP to classify all CAMS trips (including orphans) as Limited Access or General Category.
 **** It uses the ACCESSAREA field from the same tables to classify trips as Access Area or not.
 
-
+***see https://github.com/NEFSC/READ-SSB-metadata/blob/master/CAMS.md for more on CAMS 
 
  clear all
 
