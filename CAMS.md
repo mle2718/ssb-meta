@@ -22,7 +22,20 @@ To get access, ask for it in the [CAMS Jira board](https://apps-st.fisheries.noa
 
 See the [README](https://github.com/NEFSC/READ-SSB-Lee-metadata/) for a note about CAMS and Transportable Table Spaces (TTS).
 
-# General Caveats.
+# General Caveats
+
++ CAMS_LAND will cast day=0 to day=1 in order to create a valid date column.  This join, which does is *not* the best way to put cfders_all_years and cams_land together, illustrates. 
+
+```
+select distinct cf.cfders_id, cf.dealer_rpt_id, cf.day, cf.year, cf.month, cla.date_trip, cla.dlr_date, cla.camsid, cla.status from nefsc_garfo.cfders_all_years cf 
+    LEFT JOIN (
+    select distinct  cl.camsid, cl.year, cl.month, cl.dlr_rptid, cl.dlr_date, cl.date_trip, cl.status from cams_land cl where cl.year>=2005 and cl.dlr_rptid is not null) cla
+on cf.dealer_rpt_id=  cla.dlr_rptid and cf.month=cla.month and cf.year=cla.year
+    where cf.day=0 and 
+    cf.year>=2005 and 
+    cf.dealer_rpt_id is not null;
+```
+
 
 # Sample Code
 
