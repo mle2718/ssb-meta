@@ -24,6 +24,23 @@ See the [README](https://github.com/NEFSC/READ-SSB-Lee-metadata/) for a note abo
 
 # General Caveats.
 
+* CAMS currently fills in VALUE=NULL with a zero. This might be a problem if you are calculating average prices by summing the landings and value for all rows.  
+  
+```
+select * from cams_land where value=0 and lndlb>0 and dlr_disp<>101 and itis_tsn='167687' and  status not in ('VTR_NOT_SOLD', 'VTR_DISCARD', 'DLR_ORPHAN_SPECIES') 
+order by lndlb desc;
+ 
+select * from nefsc_garfo.cfders_all_years where DEALER_RPT_ID in ('99187778','91840653','97278482','99187792','90695887');
+```
+You may want to do this instead:
+
+```
+select sum(value) as value, sum(lndlb) as landings, sum(value)/sum(lndlb) as price from cams_land where value>0 and lndlb>0 and dlr_disp<>101 and itis_tsn='167687' and  status not in ('VTR_NOT_SOLD', 'VTR_DISCARD', 'DLR_ORPHAN_SPECIES')
+group by itis_tsn;
+
+```
+
+
 # Sample Code
 
 Some sample code can be found here: 
@@ -137,6 +154,7 @@ The variable ``PERMIT_STATE_FED`` in the CAMS_LAND table indicates whether landi
 ### Classifying Limited Access, General Category and Access Area trips 
 
 [Stata code to extract and classify scallop trips](/code_fragments/SCALLOP_CAMS_GC_LA.do)
+
 
 
 
