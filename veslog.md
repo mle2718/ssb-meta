@@ -57,6 +57,18 @@ To quickly pull the EVTRs, you can do this:
 ```
  select * from vtr.veslog2020G b where substr(b.SERIAL_NUM,9,16) is not null;
 ```
+or
+```
+select * from nefsc_garfo.trip_reports_images where substr(SERIAL_NUM,9,16) is not null;
+```
+
+* The column ``SERIAL_NUM'' in the vtr data has 16 characters. It is the DOCID concatenated with 2 extra digits to identify subtrips. If you need to match to to dealer data, you must trim off the last 2 characters. As long as non-paper VTRS are 14 digits or fewer, the following is safe:
+
+```
+select substr(SERIAL_NUM,1,14) as SERIAL_NUM from nefsc_garfo.trip_reports_images ;
+```
+
+
     
 * Some of the older numbers (from 1994-1995) are non-numeric. 
     
