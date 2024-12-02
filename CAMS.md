@@ -24,7 +24,7 @@ See the [README](https://github.com/NEFSC/READ-SSB-Lee-metadata/) for a note abo
 
 # General Caveats
 
-+ CAMS_LAND will cast day=0 to day=1 in order to create a valid date column.  This join, which does is *not* the best way to put cfders_all_years and cams_land together, illustrates. 
++ CAMS_LAND will cast day=0 to day=1 in order to create a valid date column.  It will also cast month=0 to month=12. This join, which does is *not* the best way to put cfders_all_years and cams_land together, illustrates the first. 
 
 ```
 select distinct cf.cfders_id, cf.dealer_rpt_id, cf.day, cf.year, cf.month, cla.date_trip, cla.dlr_date, cla.camsid, cla.status from nefsc_garfo.cfders_all_years cf 
@@ -35,7 +35,12 @@ on cf.dealer_rpt_id=  cla.dlr_rptid and cf.month=cla.month and cf.year=cla.year
     cf.year>=2005 and 
     cf.dealer_rpt_id is not null;
 ```
-
+And this join illustrates the second:
+```
+select * from cams_land where dlr_docn in (
+select distinct docn from nefsc_garfo.cfders_all_years where month=0 and year>=2008);
+select * from nefsc_garfo.cfders_all_years where docn='WHSE_AG_190';
+```
 
 # Sample Code
 
