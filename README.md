@@ -93,6 +93,8 @@ select table_name, column_name, comments from all_col_comments where owner='CAMS
 
 [svdbs](svdbs.md) : Survey Databases
 
+[Trip Costs](Trip_Costs.md) : Dataset containing predicted trip costs
+
 [Veslog](veslog.md) : Vessel Trip Reports (VTRs)
 
 [VMS](VMS.md) : Vessel monitoring system  (VMS)
