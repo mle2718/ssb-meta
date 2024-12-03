@@ -9,7 +9,7 @@ Tables: Not sure
 
 Location: Not sure
 
-Schema: VMS on NEFSCB1
+Schema: Not sure. It had been stored on VMS on NEFSCB1, but was removed by December 2024.  
 
 # Current Collection Methods
 # Changes to collection methods
