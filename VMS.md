@@ -36,6 +36,9 @@ And here is a SQL query to extract the older data (1996-2007).
 "select EXTRACT(YEAR FROM POS_SENT_DATE) as YEAR, VESSEL_PERMIT as permit, LAT_GIS, LON_GIS, to_char(POS_SENT_DATE,'YYYY MON DD HH24:MI:SS') as POS_SENT_DATE, PREV_LAT_GIS, PREV_LON_GIS,AVERAGE_COURSE AS AVG_COURSE, AVERAGE_SPEED AS AVG_SPEED,to_char(PREV_POS_SENT_DATE,'YYYY MON DD HH24:MI:SS') as PREV_POS_SENT_DATE from VMS.OLD_VMS_1997_TO_MAY_2008 WHERE EXTRACT(YEAR FROM POS_SENT_DATE) BETWEEN 1996 and 2007 AND LAT_GIS BETWEEN 30 and 50 AND LON_GIS BETWEEN -80 and -60"
 ```
 
+Some [sample code](code_fragments/import_VMS.R) to extract the old data, loop over the annual data and save only a subset of permits. 
+
+
 
 # Update Frequency and Completeness 
 
